@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-{ label: "About", href: "#about" },
-{ label: "Works", href: "#works" },
-{ label: "Speaking", href: "#speaking" },
-{ label: "Awards", href: "#awards" },
-{ label: "Blog", href: "#blog" },
-{ label: "Contact", href: "#contact" }];
+  { label: "About", href: "#about" },
+  { label: "Works", href: "#works" },
+  { label: "Speaking", href: "#speaking" },
+  { label: "Awards", href: "#awards" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" }];
 
 
 const Navbar = () => {
@@ -28,25 +28,23 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled ? "glass-bar border-b" : "bg-transparent"}`
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "glass-bar border-b" : "bg-transparent"}`
       }>
 
-      <nav className="section-container flex items-center justify-between h-16 md:h-20">
+      <nav className="max-w-[1400px] mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
         <a
           href="#"
-          className="font-display text-xl md:text-2xl font-black uppercase text-foreground tracking-wide">RAINGOESAWAY
-
-
+          className="font-display text-xl md:text-2xl font-black text-foreground tracking-wide">
+          🌧️ raingoesaway<span className="text-primary">.</span>
         </a>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
           {navItems.map((item) =>
-          <li key={item.href}>
+            <li key={item.href}>
               <button
-              onClick={() => handleClick(item.href)}
-              className="text-[11px] font-display tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
+                onClick={() => handleClick(item.href)}
+                className="text-[11px] font-display tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors duration-300">
 
                 {item.label}
               </button>
@@ -66,18 +64,18 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen &&
-      <div className="md:hidden glass-bar border-b animate-fade-up">
+        <div className="md:hidden glass-bar border-b animate-fade-up">
           <ul className="section-container py-6 flex flex-col gap-4">
             {navItems.map((item) =>
-          <li key={item.href}>
+              <li key={item.href}>
                 <button
-              onClick={() => handleClick(item.href)}
-              className="text-[11px] font-display tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors w-full text-left">
+                  onClick={() => handleClick(item.href)}
+                  className="text-[11px] font-display tracking-[0.15em] uppercase text-muted-foreground hover:text-primary transition-colors w-full text-left">
 
                   {item.label}
                 </button>
               </li>
-          )}
+            )}
           </ul>
         </div>
       }

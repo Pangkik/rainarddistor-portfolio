@@ -16,7 +16,7 @@ const HeroSection = () => {
       {/* Top glass bar */}
       <div className="absolute top-0 left-0 right-0 z-20">
         <div className="glass-bar mx-4 mt-20 md:mt-24 px-6 py-3 flex items-center justify-between rounded-xl">
-          
+
           <span className="section-label">
             {new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long" }).format(new Date())}
           </span>
@@ -29,7 +29,7 @@ const HeroSection = () => {
           {/* Giant text BEHIND - z-index 1 */}
           <div className="absolute inset-0 flex items-center justify-center z-[1] pointer-events-none select-none">
             <h1 className="font-display font-black uppercase text-foreground leading-[0.9] tracking-[-0.03em] text-center"
-            style={{ fontSize: "clamp(4rem, 14vw, 10rem)" }}>
+              style={{ fontSize: "clamp(4rem, 14vw, 10rem)" }}>
               <span className="block">RAINARD</span>
               <span className="block">DISTOR</span>
             </h1>
@@ -68,9 +68,9 @@ const HeroSection = () => {
       {/* Bottom glass bar */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
         <div className="glass-bar mx-4 mb-4 px-6 py-3 flex items-center justify-between rounded-xl">
-          <span className="section-label">rainarddistor.lovable.app</span>
-          <span className="section-label">@raingoesaway</span>
-          <span className="section-label hidden sm:inline">Philippines</span>
+          <span className="section-label">where are we going?</span>
+          <span className="section-label">we are going away!</span>
+          <span className="section-label hidden sm:inline">raingoesaway.com</span>
         </div>
       </div>
 
