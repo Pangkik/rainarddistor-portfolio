@@ -129,7 +129,7 @@ const Admin = () => {
         {fetching ? (
           <div className="space-y-4">
             {[1, 2, 3].map(i => (
-              <div key={i} className="editorial-card animate-pulse h-20" />
+              <div key={i} className="editorial-card animate-pulse h-25" />
             ))}
           </div>
         ) : posts.length === 0 ? (
@@ -154,11 +154,10 @@ const Admin = () => {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-1">
                     <h3 className="font-serif text-lg text-foreground truncate">{post.title}</h3>
-                    <span className={`text-xs font-sans tracking-widest uppercase px-2 py-0.5 rounded-sm ${
-                      post.status === "published"
+                    <span className={`text-xs font-sans tracking-widest uppercase px-2 py-0.5 rounded-sm ${post.status === "published"
                         ? "bg-primary/10 text-primary"
                         : "bg-muted text-muted-foreground"
-                    }`}>
+                      }`}>
                       {post.status}
                     </span>
                   </div>

@@ -41,7 +41,7 @@ const ContactSection = () => {
                   <Linkedin size={18} />
                 </a>
                 <a
-                  href="#"
+                  href="https://x.com/rainarddistor_?t=Wd0pCN7LUl5F2UGQu5WZng"
                   className="p-3 glass-card !transform-none !rounded-xl hover:!border-primary/40 text-muted-foreground hover:text-primary transition-all"
                 >
                   <Twitter size={18} />
