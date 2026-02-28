@@ -1,4 +1,4 @@
-import { Mic } from "lucide-react";
+import { Mic, ArrowUpRight } from "lucide-react";
 
 const engagements = [
   {
@@ -47,9 +47,12 @@ const SpeakingSection = () => {
 
         <div className="space-y-0">
           {engagements.map((eng, i) => (
-            <div
+            <a
               key={i}
-              className="group py-8 first:pt-0 last:border-b-0 hover:bg-muted/20 transition-colors px-6 -mx-6 rounded-xl"
+              href={eng.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card p-6 group cursor-pointer block"
               style={{ borderBottom: "1px solid hsl(0 0% 100% / 0.06)" }}
             >
               <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
@@ -64,12 +67,15 @@ const SpeakingSection = () => {
                   <p className="text-sm font-body text-primary mb-2">
                     {eng.role} — <em>{eng.topic}</em>
                   </p>
-                  <p className="text-sm font-body text-muted-foreground leading-relaxed">
+                  <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4">
                     {eng.description}
                   </p>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-display tracking-[0.15em] uppercase text-primary group-hover:gap-2 transition-all">
+                    View More <ArrowUpRight size={14} />
+                  </span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

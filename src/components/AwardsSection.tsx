@@ -1,4 +1,4 @@
-import { Award, GraduationCap } from "lucide-react";
+import { Award, GraduationCap, ArrowUpRight } from "lucide-react";
 
 const awards = [
   {
@@ -22,7 +22,7 @@ const awards = [
     org: "ASEAN-Australia Strategic Youth Partnership (AAYSP)",
     year: "2025",
     type: "scholarship/delegate",
-    Url: "https://www.facebook.com/share/p/1AjA8Q5Et3/",
+    url: "https://www.facebook.com/share/p/1AjA8Q5Et3/",
     description: "Selected as a Philippine representative to engage in high-level strategic dialogue on the Blue Economy, Maritime Security, and Ocean Sustainability in Cebu, Philippines.",
   },
   {
@@ -47,7 +47,13 @@ const AwardsSection = () => {
 
         <div className="grid md:grid-cols-2 gap-6">
           {awards.map((award, i) => (
-            <div key={i} className="glass-card p-6 group">
+            <a
+              key={i}
+              href={award.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card p-6 group cursor-pointer block"
+            >
               <div className="flex items-start justify-between mb-4">
                 {award.type === "award" ? (
                   <Award size={20} className="text-primary" />
@@ -60,10 +66,13 @@ const AwardsSection = () => {
                 {award.title}
               </h3>
               <p className="text-sm font-body text-primary/70 mb-3">{award.org}</p>
-              <p className="text-sm font-body text-muted-foreground leading-relaxed">
+              <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4">
                 {award.description}
               </p>
-            </div>
+              <span className="inline-flex items-center gap-1 text-[11px] font-display tracking-[0.15em] uppercase text-primary group-hover:gap-2 transition-all">
+                View More <ArrowUpRight size={14} />
+              </span>
+            </a>
           ))}
         </div>
       </div>
