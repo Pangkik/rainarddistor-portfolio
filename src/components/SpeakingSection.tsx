@@ -65,7 +65,7 @@ const SpeakingSection = () => {
                     {eng.event}
                   </h3>
                   <p className="text-sm font-body text-primary mb-2">
-                    {eng.role} — <em>{eng.topic}</em>
+                    {eng.role}, <em>{eng.topic}</em>
                   </p>
                   <p className="text-sm font-body text-muted-foreground leading-relaxed mb-4">
                     {eng.description}

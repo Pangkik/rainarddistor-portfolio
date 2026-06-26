@@ -1,0 +1,17 @@
+{
+  "buildCommand": "npm run build:ssg",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://raingoesaway.com/$1",
+      "has": [{ "type": "host", "value": "www.raingoesaway.com" }],
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

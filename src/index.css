@@ -125,6 +125,11 @@
     background: linear-gradient(90deg, transparent, hsl(var(--accent-green)), transparent);
   }
 
+  .silver-line {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, hsl(var(--muted-foreground) / 0.4), transparent);
+  }
+
   .btn-primary {
     @apply px-8 py-3 bg-primary text-primary-foreground font-display text-sm tracking-widest uppercase transition-all duration-300;
     border-radius: 100px;

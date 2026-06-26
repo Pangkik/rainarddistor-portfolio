@@ -6,7 +6,7 @@ const Footer = () => {
           © {new Date().getFullYear()} All rights reserved.
         </p>
         <p className="section-label opacity-50">
-          Writer · Researcher · AI Analyst · Technology Policy Specialist
+          Writer · Researcher · AI Governance
         </p>
       </div>
     </footer>

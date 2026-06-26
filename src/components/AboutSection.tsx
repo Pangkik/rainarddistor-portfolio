@@ -28,7 +28,7 @@ const AboutSection = () => {
                 A writer, researcher, and AI alignment specialist from the rural Philippines, dedicated to understanding how artificial intelligence intersects with ethics, governance, and the communities often left behind by technological progress.
               </p>
               <p>
-                With a background in classical philosophy, legal studies, and hands-on AI alignment work at Outlier AI, the mission is to bridge the gap between cutting-edge technology and the people who need to understand it most — from policymakers in ASEAN boardrooms to farmers' grandchildren in Western Visayas.
+                With a background in classical philosophy and hands-on AI alignment work at Outlier AI, the mission is to bridge the gap between cutting-edge technology and the people who need to understand it most, from policymakers in ASEAN boardrooms to farmers' grandchildren in Western Visayas.
               </p>
               <p>
                 Through published policy research, international speaking engagements, and recognition as Champion of the ASEAN-IPR Cybersecurity Youth Essay Competition, contributing to the critical conversation about how we build, regulate, teach, and live alongside AI, especially for those who have never been part of that conversation before.
