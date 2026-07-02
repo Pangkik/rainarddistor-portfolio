@@ -3,7 +3,7 @@ title: "Can the Philippines Regulate AI Without Losing the Filipino People in th
 slug: "philippines-ai-governance-sovereign-builder"
 date: "2026-07-02"
 category: "AI Governance"
-excerpt: "The Philippines spent 2025 writing AI strategy documents."
+excerpt: "The Philippines spent 2025 writing AI strategy documents. In 2026 it finds out whether any of them survive 115 million people and three competing agencies."
 image: "/blog-images/philippines-ai-governance-sovereign-builder.png"
 imageAlt: "Stylized illustration of the Philippine archipelago connected by circuit lines, representing AI governance"
 ---

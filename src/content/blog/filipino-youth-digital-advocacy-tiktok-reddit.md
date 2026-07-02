@@ -3,7 +3,7 @@ title: "The Protest Moved to a Vertical Screen: Filipino Youth Advocacy After th
 slug: "filipino-youth-digital-advocacy-tiktok-reddit"
 date: "2026-07-02"
 category: "Digital Advocacy"
-excerpt: "A generation of Filipino organizers learned to march. This one learned to loop a fifteen-second clip until it could not be ignored. That is not a decline in seriousness."
+excerpt: "Filipino youth activism moved from the streets to a vertical screen. Research across Southeast Asia says that shift is a real challenge to power, not a lesser one."
 image: "/blog-images/filipino-youth-digital-advocacy-tiktok-reddit.png"
 imageAlt: "Stylized illustration of a megaphone, hashtag, and play button above a small crowd, representing digital advocacy"
 ---

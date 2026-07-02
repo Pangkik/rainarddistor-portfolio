@@ -2,18 +2,25 @@
 
 > Personal site of Rainard Distor, a writer and researcher working on AI governance and digital policy in Southeast Asia. Champion of the ASEAN-IPR Cybersecurity Youth Essay Competition and Philippine delegate to regional policy programs.
 
-Rainard Distor writes about AI governance, AI ethics, digital policy, and cybersecurity from a Southeast Asian and ASEAN perspective. His work focuses on communities that AI policy tends to leave out.
+Rainard Distor writes about AI governance, AI ethics, digital policy, and cybersecurity from a Southeast Asian and ASEAN perspective. His work focuses on communities that AI policy tends to leave out. The articles below are original analysis with cited primary sources, written for readers who want the specifics rather than the summary.
 
 ## Pages
 
 - [Home](https://www.raingoesaway.com/): About, publications, speaking, recognition, and contact
 - [Blog](https://www.raingoesaway.com/blog): Essays on AI governance and digital policy in Southeast Asia
 
-## Selected work
+## Blog articles
+
+- [Can the Philippines Regulate AI Without Losing the Filipino People in the Process?](https://www.raingoesaway.com/blog/philippines-ai-governance-sovereign-builder): How the Philippine National AI Strategy, a stalled AI Development Act, and three separate agency frameworks (DICT, DOST, DEPDev) add up to AI governance without a single accountability structure.
+- [Deepfakes, Troll Farms, and a Bill That Might Criminalize the Wrong People](https://www.raingoesaway.com/blog/philippines-cybersecurity-digital-rights): Why the 2026 Digital Media Anti-False Information Act, with six to twelve year penalties, worries digital rights groups in a year when journalists were killed and 52 million credentials were breached.
+- [What Kapwa Can Teach the AI Personhood Debate](https://www.raingoesaway.com/blog/kapwa-philosophy-ai-personhood): A Filipino philosophical reading of AI moral status, using loob and kapwa to argue that relational participation, not internal properties, is the right test for personhood.
+- [The Protest Moved to a Vertical Screen: Filipino Youth Advocacy After the Streets](https://www.raingoesaway.com/blog/filipino-youth-digital-advocacy-tiktok-reddit): Research on how Filipino Gen Z uses TikTok and Instagram for real civic action, and why Facebook and Twitter no longer convert attention into it.
+- [Nobody Ranks "Fast" Anymore. This Is What Gets Content Cited by AI](https://www.raingoesaway.com/blog/ai-engine-optimization-reddit-tiktok-geo): A practical guide to Generative Engine Optimization and Answer Engine Optimization, covering why Reddit, TikTok, and structured citations now decide AI visibility.
+
+## Selected publications
 
 - PSYbersecurity: Empowering Youth to Defend Data in a Digital World, ASEAN Institute of Peace and Reconciliation, 2025
 - Wave Makers: Youth Voices for Ocean Futures, ASEAN-Australia Youth Strategic Partnership, 2026
-- What ASEAN Gets Wrong About AI Governance, 2026
 
 ## Contact
 

@@ -3,7 +3,7 @@ title: "Nobody Ranks "Fast" Anymore. This Is What Gets Content Cited by AI"
 slug: "ai-engine-optimization-reddit-tiktok-geo"
 date: "2026-07-02"
 category: "AI Search"
-excerpt: "Google now shows an AI-generated summary on roughly half of all search queries, a share projected to climb past 75% by 2028 (Omnius: AI Search & GEO Report 2026)."
+excerpt: "Google shows an AI summary on nearly half of all searches, and most never get a click. Winning now means being cited by AI, not ranked. Here is what earns a citation."
 image: "/blog-images/ai-engine-optimization-reddit-tiktok-geo.png"
 imageAlt: "Stylized illustration of a magnifying glass over layered platform panels, representing multi-platform AI search"
 ---
@@ -34,7 +34,7 @@ None of this guarantees fast ranking, and nobody who tells you otherwise is desc
 
 ## What this means in practice
 
-Building visibility for a cause, a brand, or an idea in 2026 is a distribution problem across at least four surfaces at once: a structured, well-cited article on your own site; a Reddit thread that earns real engagement because it helps; a TikTok video with searchable on-screen text and a specific hashtag; and enough consistency across all three that AI systems encounter the same claims, backed by the same sources, more than once. That consistency, repeated and independently verifiable across platforms, is closer to what earns an AI citation than any single optimization trick. It is slower than a growth-hacking promise. It also happens to be the only version of this that holds up when someone checks the sources.
+Building visibility for a cause, a brand, or an idea in 2026 is a distribution problem across several surfaces at once. You need a structured, well-cited article on your own site. You need a Reddit thread that earns real engagement because it actually helps someone. You need a TikTok video with searchable on-screen text and a specific hashtag. Most of all you need enough consistency that AI systems encounter the same claims, backed by the same sources, more than once. That consistency, repeated and independently verifiable across platforms, is closer to what earns an AI citation than any single optimization trick. It is slower than a growth-hacking promise. It also happens to be the only version of this that holds up when someone checks the sources.
 
 ### Further reading
 - [Search Everywhere Optimization: TikTok, YouTube, Amazon, AI](https://www.digitalapplied.com/blog/search-everywhere-optimization-tiktok-youtube-amazon-ai-2026)

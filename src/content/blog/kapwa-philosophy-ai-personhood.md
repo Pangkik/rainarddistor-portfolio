@@ -3,7 +3,7 @@ title: "What Kapwa Can Teach the AI Personhood Debate"
 slug: "kapwa-philosophy-ai-personhood"
 date: "2026-07-02"
 category: "AI Ethics"
-excerpt: "Western philosophy of AI keeps circling the same question: does a machine deserve moral status."
+excerpt: "Western AI ethics asks whether a machine deserves moral status. Filipino philosophy, starting from kapwa and loob, suggests that is the wrong first question."
 image: "/blog-images/kapwa-philosophy-ai-personhood.png"
 imageAlt: "Stylized illustration of two interlocking silhouettes forming a relational shape, representing kapwa"
 ---

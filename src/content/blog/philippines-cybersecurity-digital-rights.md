@@ -3,7 +3,7 @@ title: "Deepfakes, Troll Farms, and a Bill That Might Criminalize the Wrong Peop
 slug: "philippines-cybersecurity-digital-rights"
 date: "2026-07-02"
 category: "Cybersecurity"
-excerpt: "Three Filipino journalists were shot dead in 2025. The International Federation of Journalists counted them among 128 media workers killed worldwide that year (FMA / Human Rights Online Philippines)."
+excerpt: "Cybersecurity and press freedom used to be separate conversations in the Philippines. A disinformation bill with heavy prison penalties made them the same one."
 image: "/blog-images/philippines-cybersecurity-digital-rights.png"
 imageAlt: "Stylized illustration of a shield protecting a speech bubble, representing cybersecurity and press freedom"
 ---
