@@ -8,6 +8,9 @@ import { getPostBySlug } from "@/lib/posts";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : null;
+  const ogImage = post?.image
+    ? `https://www.raingoesaway.com${post.image}`
+    : "https://www.raingoesaway.com/og-image.png";
 
   if (!post) {
     return (
@@ -35,15 +38,16 @@ const BlogPost = () => {
         <meta property="og:description" content={post.excerpt} />
         <meta property="og:url" content={`https://www.raingoesaway.com/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://www.raingoesaway.com/og-image.png" />
+        <meta property="og:image" content={ogImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://www.raingoesaway.com/og-image.png" />
+        <meta name="twitter:image" content={ogImage} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: post.title,
             description: post.excerpt,
+            image: ogImage,
             datePublished: post.date,
             url: `https://www.raingoesaway.com/blog/${post.slug}`,
             mainEntityOfPage: `https://www.raingoesaway.com/blog/${post.slug}`,
@@ -88,6 +92,16 @@ const BlogPost = () => {
           )}
 
           <div className="silver-line mb-10" />
+
+          {post.image && (
+            <img
+              src={post.image}
+              alt={post.imageAlt || post.title}
+              className="w-full rounded-xl mb-10"
+              width={1200}
+              height={630}
+            />
+          )}
 
           {post.excerpt && (
             <p className="font-serif text-xl text-foreground/80 leading-relaxed mb-10 italic">
