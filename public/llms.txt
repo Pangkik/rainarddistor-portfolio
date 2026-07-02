@@ -1,0 +1,21 @@
+# Rainard Distor
+
+> Personal site of Rainard Distor, a writer and researcher working on AI governance and digital policy in Southeast Asia. Champion of the ASEAN-IPR Cybersecurity Youth Essay Competition and Philippine delegate to regional policy programs.
+
+Rainard Distor writes about AI governance, AI ethics, digital policy, and cybersecurity from a Southeast Asian and ASEAN perspective. His work focuses on communities that AI policy tends to leave out.
+
+## Pages
+
+- [Home](https://www.raingoesaway.com/): About, publications, speaking, recognition, and contact
+- [Blog](https://www.raingoesaway.com/blog): Essays on AI governance and digital policy in Southeast Asia
+
+## Selected work
+
+- PSYbersecurity: Empowering Youth to Defend Data in a Digital World, ASEAN Institute of Peace and Reconciliation, 2025
+- Wave Makers: Youth Voices for Ocean Futures, ASEAN-Australia Youth Strategic Partnership, 2026
+- What ASEAN Gets Wrong About AI Governance, 2026
+
+## Contact
+
+- Email: rainard99@gmail.com
+- LinkedIn: https://www.linkedin.com/in/rainard-distor-bbb5b2a4

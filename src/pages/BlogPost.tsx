@@ -30,14 +30,35 @@ const BlogPost = () => {
       <Helmet>
         <title>{post.title} | Rainard Distor</title>
         <meta name="description" content={post.excerpt} />
-        <link rel="canonical" href={`https://raingoesaway.com/blog/${post.slug}`} />
+        <link rel="canonical" href={`https://www.raingoesaway.com/blog/${post.slug}`} />
         <meta property="og:title" content={`${post.title} | Rainard Distor`} />
         <meta property="og:description" content={post.excerpt} />
-        <meta property="og:url" content={`https://raingoesaway.com/blog/${post.slug}`} />
+        <meta property="og:url" content={`https://www.raingoesaway.com/blog/${post.slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="https://raingoesaway.com/og-image.png" />
+        <meta property="og:image" content="https://www.raingoesaway.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://raingoesaway.com/og-image.png" />
+        <meta name="twitter:image" content="https://www.raingoesaway.com/og-image.png" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.date,
+            url: `https://www.raingoesaway.com/blog/${post.slug}`,
+            mainEntityOfPage: `https://www.raingoesaway.com/blog/${post.slug}`,
+            author: {
+              "@type": "Person",
+              name: "Rainard Distor",
+              url: "https://www.raingoesaway.com/",
+            },
+            publisher: {
+              "@type": "Person",
+              name: "Rainard Distor",
+              url: "https://www.raingoesaway.com/",
+            },
+          })}
+        </script>
       </Helmet>
 
       <Navbar />

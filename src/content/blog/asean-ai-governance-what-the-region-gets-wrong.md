@@ -14,11 +14,11 @@ Most of these frameworks are written for the wrong reader. They speak the langua
 
 There is a second problem. ASEAN frameworks tend to be non-binding. They publish principles. They encourage voluntary compliance. They hold consultations with industry. What they rarely do is mandate anything, and what they almost never do is give ordinary people a way to challenge an AI decision that affected them. Accountability mechanisms are the weakest part of every framework I have read.
 
-This matters more than the frameworks' authors seem to realize. AI is already being used in the region for credit scoring, hiring decisions, and content moderation. The people most affected by these systems are the people least able to navigate a formal complaints process, even if one existed.
+This matters more than the frameworks' authors seem to realize. AI is already being used in the region for credit scoring and hiring decisions, and it increasingly shapes what people see online. The people most affected by these systems are the people least able to navigate a formal complaints process, even if one existed.
 
 The frameworks also tend to copy each other. Many of them are modeled on the EU AI Act or the OECD AI Principles, which were written with European and North American policy contexts in mind. The ASEAN context is different. Data infrastructure is uneven. Digital literacy varies enormously across income levels. The kinds of AI harms that matter most here are not always the same ones that drove European legislation.
 
-What would a genuinely regional approach look like? It would start from the ground up, from the communities that have the least and stand to lose the most. It would build accountability into the framework rather than leaving it as an afterthought. It would involve civil society organizations that already work in these communities, not just the tech companies and government ministries that tend to dominate consultation processes.
+What would a genuinely regional approach look like? It would start from the ground up, from the communities that have the least and stand to lose the most. Accountability would be built into the framework rather than left as an afterthought, and civil society organizations that already work in these communities would sit at the table alongside the tech companies and government ministries that tend to dominate consultation processes.
 
 None of this is impossible. It is just harder than publishing a document.
 

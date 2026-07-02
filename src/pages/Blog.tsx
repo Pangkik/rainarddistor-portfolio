@@ -20,17 +20,17 @@ const Blog = () => (
         name="description"
         content="Writing on AI governance and digital policy in Southeast Asia, with a focus on who gets left out of the conversation."
       />
-      <link rel="canonical" href="https://raingoesaway.com/blog" />
+      <link rel="canonical" href="https://www.raingoesaway.com/blog" />
       <meta property="og:title" content="Blog | Rainard Distor" />
       <meta
         property="og:description"
         content="Writing on AI governance and digital policy in Southeast Asia."
       />
-      <meta property="og:url" content="https://raingoesaway.com/blog" />
+      <meta property="og:url" content="https://www.raingoesaway.com/blog" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://raingoesaway.com/og-image.png" />
+      <meta property="og:image" content="https://www.raingoesaway.com/og-image.png" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content="https://raingoesaway.com/og-image.png" />
+      <meta name="twitter:image" content="https://www.raingoesaway.com/og-image.png" />
     </Helmet>
 
     <Navbar />

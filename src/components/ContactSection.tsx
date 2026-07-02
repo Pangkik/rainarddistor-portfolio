@@ -6,7 +6,11 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for your message! This form will be connected to a backend soon.");
+    const subject = encodeURIComponent(form.subject || `Message from ${form.name}`);
+    const body = encodeURIComponent(
+      `${form.message}\n\nFrom: ${form.name}${form.email ? ` (${form.email})` : ""}`
+    );
+    window.location.href = `mailto:rainard99@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (

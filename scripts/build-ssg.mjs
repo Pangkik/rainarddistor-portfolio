@@ -72,7 +72,7 @@ async function buildSSG() {
   }
 
   // Step 7: Generate sitemap.xml
-  const base = "https://raingoesaway.com";
+  const base = "https://www.raingoesaway.com";
   const urlEntries = routes
     .map(
       (r) => `  <url>\n    <loc>${base}${r}</loc>\n    <changefreq>${r === "/" ? "weekly" : "monthly"}</changefreq>\n  </url>`
