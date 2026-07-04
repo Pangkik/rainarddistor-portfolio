@@ -31,8 +31,8 @@ const formattedDate = post.data.date
 const contentHtml = await marked(post.body);
 
 const ogImage = post.data.image
-  ? `https://raingoesaway.com${post.data.image}`
-  : "https://raingoesaway.com/og-image.png";
+  ? `https://www.raingoesaway.com${post.data.image}`
+  : "https://www.raingoesaway.com/og-image.png";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -41,17 +41,17 @@ const jsonLd = {
   description: post.data.excerpt || "",
   image: ogImage,
   datePublished: post.data.date,
-  url: `https://raingoesaway.com/blog/${slug}`,
-  mainEntityOfPage: `https://raingoesaway.com/blog/${slug}`,
+  url: `https://www.raingoesaway.com/blog/${slug}`,
+  mainEntityOfPage: `https://www.raingoesaway.com/blog/${slug}`,
   author: {
     "@type": "Person",
     name: "Rainard Distor",
-    url: "https://raingoesaway.com/",
+    url: "https://www.raingoesaway.com/",
   },
   publisher: {
     "@type": "Person",
     name: "Rainard Distor",
-    url: "https://raingoesaway.com/",
+    url: "https://www.raingoesaway.com/",
   },
 };
 ---
