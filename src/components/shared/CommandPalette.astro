@@ -1,0 +1,425 @@
+---
+// CommandPalette: ⌘K search modal using Pagefind
+// Fully static, vanilla JS, no framework dependencies
+---
+
+<div class="cmdk-backdrop" id="cmdk-backdrop" hidden>
+  <div class="cmdk-panel">
+    <input
+      type="text"
+      class="cmdk-input"
+      id="cmdk-input"
+      placeholder="Search writing, about, works..."
+      aria-label="Search"
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <div class="cmdk-results" id="cmdk-results">
+      <div class="cmdk-empty" id="cmdk-empty">
+        <p>No results found</p>
+      </div>
+      <div class="cmdk-list" id="cmdk-list" role="listbox"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cmdk-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(19, 19, 19, 0.6);
+    z-index: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: clamp(5rem, 10vh, 10rem);
+    padding-inline: var(--space-sm);
+    backdrop-filter: blur(2px);
+    animation: cmdk-backdrop-in 0.15s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cmdk-backdrop {
+      animation: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @keyframes cmdk-backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .cmdk-panel {
+    width: 100%;
+    max-width: 600px;
+    background: var(--bg-2);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: 65vh;
+    animation: cmdk-panel-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cmdk-panel {
+      animation: none;
+    }
+  }
+
+  @keyframes cmdk-panel-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96) translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .cmdk-input {
+    flex: none;
+    padding: var(--space-md);
+    padding-bottom: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    outline: none;
+  }
+
+  .cmdk-input::placeholder {
+    color: var(--fg-3);
+  }
+
+  .cmdk-results {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .cmdk-empty {
+    padding: var(--space-md);
+    text-align: center;
+    color: var(--fg-3);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+  }
+
+  .cmdk-list {
+    padding: var(--space-sm) 0;
+  }
+
+  /* Results are injected via innerHTML, so they never receive Astro's
+     scope attribute. Anchor the rules on the static .cmdk-list container
+     and mark the injected descendants :global so the styles apply without
+     leaking site-wide. */
+  .cmdk-list :global(.cmdk-result) {
+    padding: var(--space-sm) var(--space-md);
+    cursor: pointer;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    display: block;
+    scroll-margin: var(--space-sm);
+    transition: background 0.15s ease;
+  }
+
+  .cmdk-list :global(.cmdk-result:first-child) {
+    border-top: 0;
+  }
+
+  .cmdk-list :global(.cmdk-result:hover),
+  .cmdk-list :global(.cmdk-result.is-highlighted) {
+    background: var(--bg-3);
+  }
+
+  .cmdk-list :global(.cmdk-result-title) {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--step-0);
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  .cmdk-list :global(.cmdk-result-excerpt) {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    color: var(--fg-3);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .cmdk-list :global(.cmdk-result mark) {
+    background: color-mix(in srgb, var(--accent-fg) 20%, transparent);
+    color: var(--accent-fg);
+    font-weight: 500;
+    border-radius: 2px;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 375px) {
+    .cmdk-backdrop {
+      padding-top: clamp(3rem, 8vh, 8rem);
+      padding-inline: var(--space-xs);
+    }
+
+    .cmdk-panel {
+      max-height: 80vh;
+    }
+
+    .cmdk-input {
+      font-size: var(--step--1);
+      padding: var(--space-sm);
+      padding-bottom: var(--space-xs);
+    }
+
+    .cmdk-result {
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .cmdk-result-title {
+      font-size: var(--step--1);
+      margin-bottom: 0.25rem;
+    }
+
+    .cmdk-result-excerpt {
+      font-size: var(--step--2);
+    }
+  }
+</style>
+
+<script>
+  // Pagefind search integration with keyboard navigation
+  interface SearchResult {
+    data: () => Promise<{
+      url: string;
+      meta: { title: string };
+      excerpt: string;
+    }>;
+  }
+
+  let pagefindReady = false;
+  let pagefindModule: any = null;
+  let currentHighlightedIndex = -1;
+  let allResults: SearchResult[] = [];
+
+  const backdrop = document.getElementById("cmdk-backdrop");
+  const input = document.getElementById("cmdk-input") as HTMLInputElement;
+  const list = document.getElementById("cmdk-list");
+  const empty = document.getElementById("cmdk-empty");
+  const hintButton = document.getElementById("cmdk-hint") as HTMLElement;
+
+  // Lazy-load Pagefind on first search
+  async function loadPagefind() {
+    if (pagefindReady) return;
+    try {
+      pagefindModule = await import("/pagefind/pagefind.js");
+      pagefindReady = true;
+    } catch (e) {
+      console.error("Failed to load Pagefind:", e);
+    }
+  }
+
+  // Open palette
+  function openPalette() {
+    if (!backdrop) return;
+    backdrop.hidden = false;
+    input?.focus();
+    loadPagefind();
+    currentHighlightedIndex = -1;
+  }
+
+  // Close palette
+  function closePalette() {
+    if (!backdrop) return;
+    backdrop.hidden = true;
+    input?.blur();
+    currentHighlightedIndex = -1;
+    clearHighlight();
+    input!.value = "";
+  }
+
+  // Clear and hide empty state
+  function clearResults() {
+    if (list) list.innerHTML = "";
+    if (empty) empty.hidden = true;
+    allResults = [];
+    currentHighlightedIndex = -1;
+  }
+
+  // Show no-results message
+  function showEmpty() {
+    clearResults();
+    if (empty) empty.hidden = false;
+  }
+
+  // Clear highlight
+  function clearHighlight() {
+    document.querySelectorAll(".cmdk-result.is-highlighted").forEach((el) => {
+      el.classList.remove("is-highlighted");
+    });
+  }
+
+  // Highlight result by index
+  function highlightIndex(idx: number) {
+    clearHighlight();
+    if (idx < 0 || idx >= allResults.length) return;
+    currentHighlightedIndex = idx;
+    const btn = list?.querySelector(
+      `.cmdk-result[data-index="${idx}"]`
+    ) as HTMLElement;
+    if (btn) {
+      btn.classList.add("is-highlighted");
+      btn.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  // Execute search
+  async function performSearch(query: string) {
+    if (!pagefindReady || !pagefindModule) {
+      showEmpty();
+      return;
+    }
+
+    clearResults();
+
+    if (!query.trim()) {
+      showEmpty();
+      return;
+    }
+
+    try {
+      const search = await pagefindModule.search(query);
+      const hits = search.results || [];
+      if (!hits.length) {
+        showEmpty();
+        return;
+      }
+
+      allResults = hits.slice(0, 6);
+      if (empty) empty.hidden = true;
+
+      const dataPromises = allResults.map((r: SearchResult) => r.data());
+      const dataList = await Promise.all(dataPromises);
+
+      if (list) {
+        list.innerHTML = dataList
+          .map((data: any, idx: number) => {
+            const title = data.meta?.title || "Untitled";
+            const excerpt = data.excerpt || "";
+            return `
+              <button
+                class="cmdk-result"
+                data-index="${idx}"
+                data-url="${data.url}"
+                role="option"
+              >
+                <span class="cmdk-result-title">${title}</span>
+                <span class="cmdk-result-excerpt">${excerpt}</span>
+              </button>
+            `;
+          })
+          .join("");
+
+        // Attach click handlers
+        list.querySelectorAll(".cmdk-result").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const url = btn.getAttribute("data-url");
+            if (url) window.location.href = url;
+          });
+        });
+      }
+    } catch (e) {
+      console.error("Search error:", e);
+      showEmpty();
+    }
+  }
+
+  // Debounced search
+  let searchTimeout: number;
+  function handleInput(e: Event) {
+    clearTimeout(searchTimeout);
+    const query = (e.target as HTMLInputElement).value;
+    currentHighlightedIndex = -1;
+    searchTimeout = window.setTimeout(() => performSearch(query), 150);
+  }
+
+  // Keyboard navigation
+  function handleKeyDown(e: KeyboardEvent) {
+    if (!backdrop || backdrop.hidden) return;
+
+    switch (e.key) {
+      case "Escape":
+        e.preventDefault();
+        closePalette();
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        highlightIndex(Math.min(currentHighlightedIndex + 1, allResults.length - 1));
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        highlightIndex(Math.max(currentHighlightedIndex - 1, -1));
+        if (currentHighlightedIndex === -1) input?.focus();
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (currentHighlightedIndex >= 0) {
+          const btn = list?.querySelector(
+            `.cmdk-result[data-index="${currentHighlightedIndex}"]`
+          ) as HTMLElement;
+          btn?.click();
+        }
+        break;
+    }
+  }
+
+  // Close on backdrop click
+  backdrop?.addEventListener("click", (e) => {
+    if (e.target === backdrop) closePalette();
+  });
+
+  // Input events
+  input?.addEventListener("input", handleInput);
+  document.addEventListener("keydown", (e) => {
+    // ⌘K on Mac, Ctrl+K on Windows/Linux
+    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      if (backdrop?.hidden) openPalette();
+      else closePalette();
+    }
+    handleKeyDown(e);
+  });
+
+  // Click the hint button to open
+  hintButton?.addEventListener("click", () => {
+    if (backdrop?.hidden) openPalette();
+    else closePalette();
+  });
+
+  // Also support opening from mobile drawer toggle
+  const drawerCloseLinks = document.querySelectorAll("[data-nav-link]");
+  drawerCloseLinks.forEach((link) => {
+    // We listen to the sidebar close on mobile via the Sidebar script
+    // The hint button works on both mobile and desktop, so no special handling needed
+  });
+</script>

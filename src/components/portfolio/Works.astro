@@ -1,25 +1,25 @@
 ---
 import { works, categories } from "../../data/works";
 import { sections } from "../../data/site";
-import { buttons } from "../../data/site";
 ---
 
-<section id="works" class="works">
+<section id="works" class="block">
   <div class="shell">
-    <header class="works-head" data-reveal>
-      <div class="works-rule"></div>
-      <p class="eyebrow eyebrow--accent">{sections.works.eyebrow}</p>
-      <h2 class="works-heading">
-        SELECTED <span class="works-emphasis">WRITING</span>
-      </h2>
-    </header>
+    <div class="sec-head" data-reveal>
+      <div>
+        <h2 class="sec-title">
+          <span class="sec-num">02</span><span class="sec-dash">—</span><span>works</span>
+        </h2>
+        <p class="sec-blurb">{sections.works.blurb}</p>
+      </div>
+    </div>
 
-    {/* Filters — vanilla JS toggles, all visible with no JS */}
+    {/* Filters — vanilla JS toggles, all cards visible with no JS */}
     <div class="works-filters" role="group" aria-label="Filter works by category" data-reveal>
       {categories.map((cat, i) => (
         <button
           type="button"
-          class:list={["works-filter", { "is-active": i === 0 }]}
+          class:list={["works-filter mono", { "is-active": i === 0 }]}
           data-filter={cat}
           aria-pressed={i === 0 ? "true" : "false"}
         >
@@ -28,29 +28,24 @@ import { buttons } from "../../data/site";
       ))}
     </div>
 
-    <ol class="works-list" id="works-grid">
-      {works.map((work) => (
-        <li class="work-item" data-category={work.category} data-reveal>
-          <a
-            href={work.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="work-link"
-          >
-            <div class="work-meta">
-              <span class="eyebrow eyebrow--accent">{work.category}</span>
-              <span class="eyebrow work-date">{work.date}</span>
+    <ol class="works-grid" id="works-grid">
+      {works.map((work, i) => (
+        <li
+          class:list={["work-item", i % 2 === 0 ? "tilt-l" : "tilt-r"]}
+          data-category={work.category}
+          data-reveal
+        >
+          <a href={work.link} target="_blank" rel="noopener noreferrer" class="work-card">
+            <div class="work-top mono">
+              <span class="work-cat">{work.category}</span>
+              <span class="work-date">{work.date}</span>
             </div>
-            <div class="work-body">
-              <h3 class="work-title">{work.title}</h3>
-              <p class="work-desc">{work.description}</p>
-              <span class="work-more">
-                {buttons.readMore}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </div>
+            <h3 class="work-title">{work.title}</h3>
+            <p class="work-desc">{work.description}</p>
+            <span class="work-more mono">
+              read
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17 17 7M9 7h8v8"/></svg>
+            </span>
           </a>
         </li>
       ))}
@@ -59,151 +54,115 @@ import { buttons } from "../../data/site";
 </section>
 
 <style>
-  .works {
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-2xl);
-    background: var(--paper);
-  }
-
-  .works-head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-bottom: clamp(2.5rem, 6vw, 4rem);
-  }
-  .works-rule {
-    width: 3.5rem;
-    height: 2px;
-    background: var(--accent);
-    margin-bottom: 1.75rem;
-  }
-  .works-heading {
-    font-family: var(--font-display);
-    font-size: var(--step-3);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 1;
-    color: var(--ink);
-    margin: 0.9rem 0 0;
-    text-transform: none;
-    font-variation-settings: "opsz" 72;
-  }
-  /* Keyword emphasis in the writing register: accent word + thin underline */
-  .works-emphasis {
-    color: var(--accent-ink);
-    white-space: nowrap;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 0.05em;
-  }
-
   .works-filters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 0.5rem;
-    margin-bottom: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 2.5rem;
   }
   .works-filter {
-    font-family: var(--font-body);
-    font-size: var(--step--1);
-    font-weight: 560;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-3-solid);
+    font-size: var(--step--2);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: var(--fg-3);
     background: transparent;
     border: 1px solid var(--line);
     border-radius: 100px;
-    padding: 0.5rem 1.1rem;
+    padding: 0.4rem 0.9rem;
     cursor: pointer;
-    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   }
-  .works-filter:hover {
-    color: var(--ink);
-    border-color: var(--line-strong);
-  }
+  .works-filter:hover { color: var(--fg); border-color: var(--line-strong); }
   .works-filter.is-active {
-    color: var(--paper);
-    background: var(--ink);
-    border-color: var(--ink);
+    color: var(--bg);
+    background: var(--fg);
+    border-color: var(--fg);
   }
 
-  .works-list {
+  .works-grid {
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  .work-item {
-    border-top: 1px solid var(--line);
-  }
-  .work-item:last-child { border-bottom: 1px solid var(--line); }
-  .work-item[hidden] { display: none; }
-
-  .work-link {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.75rem;
-    padding: 2rem 0;
+    gap: 1.5rem;
   }
-  .work-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .work-date { color: var(--ink-3-solid); }
+  .work-item[hidden] { display: none; }
 
-  .work-title {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
-    font-weight: 460;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    color: var(--ink);
-    text-transform: none;
-    margin: 0 0 0.6rem;
-    transition: color 0.3s ease;
-    max-width: 24ch;
+  /* Resting tilt that straightens + lifts on hover */
+  .work-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+                box-shadow 0.4s ease, border-color 0.3s ease;
+    transform: rotate(var(--tilt, 0deg));
+    will-change: transform;
   }
-  .work-link:hover .work-title { color: var(--accent-ink); }
+  .tilt-l { --tilt: -1.2deg; }
+  .tilt-r { --tilt: 1.2deg; }
+  .work-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--line-strong);
+  }
+
+  .work-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+  .work-cat { color: var(--accent-fg); }
+  .work-date { color: var(--fg-3); }
+  .work-title {
+    font-family: var(--font-body);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    color: var(--fg);
+    margin: 0 0 0.75rem;
+  }
   .work-desc {
     font-family: var(--font-body);
     font-size: var(--step-0);
-    line-height: 1.6;
-    color: var(--ink-2);
-    margin-bottom: 1rem;
-    max-width: 52ch;
+    line-height: 1.55;
+    color: var(--fg-3);
+    margin-bottom: 1.5rem;
   }
   .work-more {
+    margin-top: auto;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-body);
+    gap: 0.4rem;
     font-size: var(--step--1);
-    font-weight: 560;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--fg-2);
   }
-  .work-more svg { transition: transform 0.3s ease; }
-  .work-link:hover .work-more svg { transform: translateX(4px); }
+  .work-card:hover .work-more { color: var(--accent-fg); }
+  .work-more svg { transition: transform 0.25s ease; }
+  .work-card:hover .work-more svg { transform: translateX(3px); }
 
-  @media (min-width: 768px) {
-    .work-link {
-      grid-template-columns: 14rem 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    .work-meta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.6rem;
-      padding-top: 0.35rem;
-    }
+  @media (min-width: 640px) {
+    .works-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  }
+  @media (min-width: 1280px) {
+    .works-grid { grid-template-columns: 1fr 1fr 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .work-more svg,
-    .work-link:hover .work-more svg { transform: none; }
+    .work-card, .tilt-l, .tilt-r { transform: none !important; }
+    .work-card:hover { transform: none !important; }
+    .work-more svg, .work-card:hover .work-more svg { transform: none; }
   }
 </style>
 

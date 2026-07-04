@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
-import Nav from "../components/shared/Nav.astro";
+import Sidebar from "../components/shared/Sidebar.astro";
 import Footer from "../components/shared/Footer.astro";
+import CommandPalette from "../components/shared/CommandPalette.astro";
 
 interface Props {
   title: string;
@@ -21,6 +22,19 @@ const ogImage = customOgImage || "https://www.raingoesaway.com/og-image.png";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* No-flash theme: set data-theme before paint from stored choice or system */}
+    <script is:inline>
+      (function () {
+        try {
+          var choice = localStorage.getItem("theme") || "system";
+          var dark = choice === "dark" ||
+            (choice === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -33,12 +47,17 @@ const ogImage = customOgImage || "https://www.raingoesaway.com/og-image.png";
     <meta name="twitter:image" content={ogImage} />
     <slot name="head" />
   </head>
-  <body class="mood-writing">
-    <Nav />
-    <main data-pagefind-body>
-      <slot />
-    </main>
-    <Footer />
+  <body>
+    <div class="app">
+      <Sidebar />
+      <div class="app-main">
+        <main data-pagefind-body>
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </div>
+    <CommandPalette />
 
     <script>
       // Progressive enhancement: mark JS available, then reveal-on-scroll.

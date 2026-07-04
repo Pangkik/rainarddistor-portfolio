@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { sections, buttons } from "../../data/site";
+import { sections } from "../../data/site";
 
 const allPosts = await getCollection("blog");
 const posts = allPosts
@@ -9,168 +9,115 @@ const posts = allPosts
 
 const formatDate = (iso: string) => {
   if (!iso) return "";
-  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long" }).format(new Date(iso));
+  return new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short" }).format(new Date(iso));
 };
 ---
 
-<section id="blog" class="feed">
+<section id="writing" class="block">
   <div class="shell">
-    <div class="feed-head" data-reveal>
-      <p class="eyebrow eyebrow--accent">{sections.blog.eyebrow}</p>
-      <h2 class="feed-heading">{sections.blog.heading}</h2>
-      <a href="/blog" class="feed-all">{buttons.allPosts}</a>
+    <div class="sec-head" data-reveal>
+      <div>
+        <h2 class="sec-title">
+          <span class="sec-num">01</span><span class="sec-dash">—</span><span>writing</span>
+        </h2>
+        <p class="sec-blurb">{sections.blog.blurb}</p>
+      </div>
+      <a href="/blog" class="sec-all">
+        all
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
     </div>
 
     {posts.length === 0 ? (
-      <div class="feed-empty">No posts published yet.</div>
+      <div class="feed-empty mono">No posts published yet.</div>
     ) : (
       <ol class="feed-list">
-        {posts.map((post, i) => {
+        {posts.map((post) => {
           const slug = post.data.slug || post.id;
           return (
             <li class="feed-item" data-reveal>
               <a href={`/blog/${slug}`} class="feed-link">
-                <span class="feed-index">{String(i + 1).padStart(2, "0")}</span>
+                <div class="feed-meta mono">
+                  {post.data.category && <span class="feed-cat">{post.data.category}</span>}
+                  <span class="feed-date">{formatDate(post.data.date)}</span>
+                </div>
                 <div class="feed-body">
-                  <div class="feed-meta">
-                    {post.data.category && <span class="eyebrow eyebrow--accent">{post.data.category}</span>}
-                    <span class="eyebrow feed-date">{formatDate(post.data.date)}</span>
-                  </div>
                   <h3 class="feed-title">{post.data.title}</h3>
                   {post.data.excerpt && <p class="feed-excerpt">{post.data.excerpt}</p>}
-                  <span class="feed-read">
-                    {buttons.read}
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </span>
                 </div>
+                <span class="feed-arrow" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                </span>
               </a>
             </li>
           );
         })}
       </ol>
     )}
-
-    <div class="feed-all-mobile">
-      <a href="/blog" class="btn-outline">{buttons.allPosts}</a>
-    </div>
   </div>
 </section>
 
 <style>
-  .feed {
-    padding-top: var(--space-3xl);
-    padding-bottom: var(--space-2xl);
-    background: var(--paper);
-  }
-  .feed-head {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.9rem;
-    padding-bottom: 2.75rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--line-strong);
-  }
-  .feed-heading {
-    font-family: var(--font-display);
-    font-size: var(--step-4);
-    font-weight: 380;
-    letter-spacing: -0.03em;
-    line-height: 0.95;
-    color: var(--ink);
-    text-transform: none;
-    font-variation-settings: "opsz" 96;
-  }
-  .feed-all {
-    margin-top: 0.4rem;
-    font-family: var(--font-body);
-    font-size: var(--step--1);
-    font-weight: 560;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
-    display: none;
-  }
-
   .feed-list { list-style: none; margin: 0; padding: 0; }
-  .feed-item { border-bottom: 1px solid var(--line); }
+  .feed-item { border-top: 1px solid var(--line); }
+  .feed-item:last-child { border-bottom: 1px solid var(--line); }
   .feed-link {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 2.25rem 0;
-    transition: opacity 0.3s ease;
-  }
-  .feed-index {
-    font-family: var(--font-body);
-    font-size: var(--step--1);
-    font-weight: 560;
-    letter-spacing: 0.1em;
-    color: var(--ink-3-solid);
-    padding-top: 0.35rem;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "meta arrow" "body arrow";
+    gap: 0.4rem 1rem;
+    padding: 1.75rem 0;
+    align-items: start;
   }
   .feed-meta {
+    grid-area: meta;
     display: flex;
-    align-items: center;
     gap: 1rem;
-    margin-bottom: 0.9rem;
+    font-size: var(--step--2);
+    color: var(--fg-3);
+    letter-spacing: 0.04em;
   }
-  .feed-date { color: var(--ink-3-solid); }
+  .feed-cat { color: var(--accent-fg); }
+  .feed-body { grid-area: body; }
   .feed-title {
-    font-family: var(--font-display);
-    font-size: var(--step-4);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    line-height: 0.98;
-    color: var(--ink);
-    margin: 0 0 0.8rem;
-    transition: color 0.3s ease;
-    font-variation-settings: "opsz" 110;
-    max-width: 20ch;
+    font-family: var(--font-body);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--fg);
+    margin: 0 0 0.5rem;
+    transition: color 0.25s ease;
+    max-width: 30ch;
   }
-  .feed-link:hover .feed-title { color: var(--accent-ink); }
+  .feed-link:hover .feed-title { color: var(--accent-fg); }
   .feed-excerpt {
     font-family: var(--font-body);
     font-size: var(--step-0);
-    line-height: 1.6;
-    color: var(--ink-2);
-    max-width: 52ch;
-    margin-bottom: 1.1rem;
+    line-height: 1.55;
+    color: var(--fg-3);
+    max-width: 62ch;
   }
-  .feed-read {
+  .feed-arrow {
+    grid-area: arrow;
     display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-body);
-    font-size: var(--step--1);
-    font-weight: 560;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
+    align-self: center;
+    color: var(--fg-3);
+    transition: color 0.25s ease, transform 0.25s ease;
   }
-  .feed-read svg { transition: transform 0.3s ease; }
-  .feed-link:hover .feed-read svg { transform: translateX(4px); }
+  .feed-link:hover .feed-arrow { color: var(--fg); transform: translateX(4px); }
+  .feed-empty { padding: 3rem 0; text-align: center; color: var(--fg-3); }
 
-  .feed-empty {
-    padding: 4rem 0;
-    text-align: center;
-    color: var(--ink-3-solid);
-    font-family: var(--font-body);
-  }
-  .feed-all-mobile { margin-top: 2.5rem; text-align: center; }
-
-  @media (min-width: 768px) {
-    .feed-all { display: inline-block; }
-    .feed-all-mobile { display: none; }
+  @media (min-width: 640px) {
     .feed-link {
-      grid-template-columns: 4rem 1fr;
-      gap: 2.5rem;
-      align-items: start;
+      grid-template-columns: 9rem 1fr auto;
+      grid-template-areas: "meta body arrow";
+      gap: 2rem;
     }
+    .feed-meta { flex-direction: column; gap: 0.4rem; padding-top: 0.35rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feed-link:hover .feed-arrow { transform: none; }
   }
 </style>

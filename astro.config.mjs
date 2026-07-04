@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://www.raingoesaway.com",
+  // Preview harness assigns a port via the PORT env var; Astro doesn't read it natively.
   server: { port: process.env.PORT ? Number(process.env.PORT) : 4321 },
   integrations: [sitemap()],
   vite: {
