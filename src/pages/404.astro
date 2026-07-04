@@ -1,0 +1,40 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist."
+  canonicalPath="/404"
+>
+  <section class="notfound">
+    <div class="notfound-inner">
+      <p class="eyebrow eyebrow--accent">404</p>
+      <h1 class="notfound-title">Oops! Page not found</h1>
+      <a href="/" class="btn-primary notfound-cta">Return to Home</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 80svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1.5rem 4rem;
+    background: var(--paper);
+  }
+  .notfound-inner { text-align: center; max-width: 30rem; }
+  .notfound-title {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 1rem 0 2.25rem;
+    font-variation-settings: "opsz" 84;
+  }
+  .notfound-cta { margin-top: 0.5rem; }
+</style>

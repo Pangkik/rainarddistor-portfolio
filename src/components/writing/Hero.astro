@@ -1,0 +1,190 @@
+---
+import { heroName, heroLabel, heroParagraph, heroButtons, glassBarStrings } from "../../data/site";
+
+const currentDate = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long" }).format(new Date());
+---
+
+<section class="hero">
+  {/* Painterly dawn backdrop — built entirely in CSS, no image */}
+  <div class="hero-atmosphere" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="shell hero-shell">
+    {/* Metadata line — date, centered above the name like a masthead date */}
+    <div class="hero-meta animate-fade-up">
+      <span class="eyebrow">{currentDate}</span>
+    </div>
+
+    {/* Giant identity, centered */}
+    <div class="hero-name-wrap">
+      <h1 class="hero-name">
+        <span class="hero-name-line animate-fade-up">{heroName[0]}</span>
+        <span class="hero-name-line animate-fade-up-delay-1">{heroName[1]}</span>
+      </h1>
+    </div>
+
+    {/* Positioning, centered */}
+    <div class="hero-copy">
+      <p class="eyebrow eyebrow--accent hero-label animate-fade-up-delay-1">{heroLabel}</p>
+      <p class="hero-paragraph animate-fade-up-delay-2">{heroParagraph}</p>
+
+      <div class="hero-actions animate-fade-up-delay-2">
+        <a href="#works" class="btn-primary">{heroButtons.explore}</a>
+        <a href="#blog" class="btn-outline">{heroButtons.blog}</a>
+        <a href="#contact" class="hero-text-link">{heroButtons.contact}</a>
+      </div>
+    </div>
+  </div>
+
+  {/* Footer strip — the three glass-bar strings as a quiet masthead line */}
+  <div class="hero-strip">
+    <div class="shell hero-strip-inner">
+      <span class="eyebrow">{glassBarStrings.top}</span>
+      <span class="eyebrow hero-strip-mid">{glassBarStrings.middle}</span>
+      <span class="eyebrow hero-strip-end">{glassBarStrings.bottom}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: clamp(32rem, 60vh, 42rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--paper);
+    padding-top: 5.75rem;
+    padding-bottom: 1.75rem;
+    overflow: hidden;
+  }
+
+  /* Layered soft radial/linear gradients in warm dawn tones — hazy landscape
+     light: warm sand, soft peach/rose, a faint sage low on the horizon. */
+  .hero-atmosphere {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      /* high warm sun glow, upper right */
+      radial-gradient(70% 55% at 78% 8%, #f4c88a66, transparent 60%),
+      /* soft peach/rose bloom, upper left */
+      radial-gradient(60% 50% at 18% 18%, #e79f8a4d, transparent 62%),
+      /* faint sage settling low, like distant hills */
+      radial-gradient(90% 45% at 50% 108%, #9fae8a55, transparent 60%),
+      /* rose horizon band */
+      radial-gradient(120% 70% at 50% 92%, #e6b09a3d, transparent 55%),
+      /* warm sand vertical wash to ground it in paper */
+      linear-gradient(180deg, #f7ead1 0%, var(--paper) 46%, var(--paper) 100%);
+  }
+  /* A softer second haze layer for painterly depth */
+  .hero-atmosphere::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(45% 40% at 65% 30%, #ffffff40, transparent 70%),
+      radial-gradient(50% 35% at 30% 55%, #c98a6626, transparent 70%);
+    mix-blend-mode: soft-light;
+  }
+
+  /* Subtle grain via an inline SVG fractal-noise filter, very low opacity */
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+  }
+
+  .hero-shell {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-meta {
+    margin-bottom: clamp(1rem, 3vw, 1.75rem);
+  }
+
+  .hero-name-wrap { margin-bottom: clamp(1.25rem, 3vw, 2rem); }
+  .hero-name {
+    font-family: var(--font-display);
+    font-weight: 340;
+    font-size: clamp(3.2rem, 1.4rem + 8.4vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin: 0;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-name-line { display: block; }
+
+  .hero-copy {
+    max-width: 44rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-label {
+    margin-bottom: 1rem;
+    letter-spacing: 0.14em;
+  }
+  .hero-paragraph {
+    font-family: var(--font-body);
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 36rem;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+  .hero-text-link {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 560;
+    letter-spacing: 0.06em;
+    color: var(--ink-2);
+    padding: 0.85rem 0.5rem;
+    border-bottom: 1px solid transparent;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .hero-text-link:hover { color: var(--accent-ink); border-color: var(--accent); }
+
+  .hero-strip {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+    margin-top: clamp(1.75rem, 4vw, 3rem);
+  }
+  .hero-strip-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-strip-mid { color: var(--accent-ink); }
+  .hero-strip-end { display: none; }
+
+  @media (min-width: 640px) {
+    .hero-strip-end { display: inline-block; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grain { display: none; }
+  }
+</style>

@@ -1,0 +1,174 @@
+---
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { buttons } from "../../data/site";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.data.slug || post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+
+const slug = post.data.slug || post.id;
+
+const formattedDate = post.data.date
+  ? new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(new Date(post.data.date))
+  : "";
+
+const contentHtml = await marked(post.body);
+
+const ogImage = post.data.image
+  ? `https://raingoesaway.com${post.data.image}`
+  : "https://raingoesaway.com/og-image.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.excerpt || "",
+  image: ogImage,
+  datePublished: post.data.date,
+  url: `https://raingoesaway.com/blog/${slug}`,
+  mainEntityOfPage: `https://raingoesaway.com/blog/${slug}`,
+  author: {
+    "@type": "Person",
+    name: "Rainard Distor",
+    url: "https://raingoesaway.com/",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Rainard Distor",
+    url: "https://raingoesaway.com/",
+  },
+};
+---
+
+<BaseLayout
+  title={`${post.data.title} | Rainard Distor`}
+  description={post.data.excerpt || ""}
+  canonicalPath={`/blog/${slug}`}
+  ogType="article"
+  ogImage={ogImage}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <article class="post">
+    <div class="post-shell">
+      <a href="/blog" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        {buttons.blog}
+      </a>
+
+      <header class="post-header">
+        <div class="post-tags">
+          {post.data.category && <span class="eyebrow eyebrow--accent">{post.data.category}</span>}
+          {formattedDate && <span class="eyebrow post-date">{formattedDate}</span>}
+        </div>
+
+        <h1 class="post-h1">{post.data.title}</h1>
+
+        {post.data.image && (
+          <img
+            src={post.data.image}
+            alt={post.data.imageAlt || ""}
+            class="post-hero-image"
+          />
+        )}
+
+        {post.data.excerpt && (
+          <p class="post-lede">{post.data.excerpt}</p>
+        )}
+      </header>
+
+      <hr class="post-divider" />
+
+      <div class="prose" set:html={contentHtml} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post {
+    padding-top: 8rem;
+    padding-bottom: var(--space-2xl);
+  }
+  .post-shell {
+    width: 100%;
+    max-width: 44rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 560;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3-solid);
+    margin-bottom: 3rem;
+    transition: color 0.25s ease;
+  }
+  .back-link:hover { color: var(--accent-ink); }
+
+  .post-tags {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .post-date { color: var(--ink-3-solid); }
+  .post-h1 {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    color: var(--ink);
+    margin: 0;
+    font-variation-settings: "opsz" 96;
+  }
+  .post-hero-image {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    margin-top: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .post-lede {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    font-weight: 380;
+    line-height: 1.35;
+    color: var(--ink-2);
+    margin-top: 1.75rem;
+    max-width: 40ch;
+  }
+  .post-divider {
+    border: 0;
+    border-top: 1px solid var(--line-strong);
+    margin: 2.75rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .post-shell { padding-inline: 2rem; }
+  }
+</style>

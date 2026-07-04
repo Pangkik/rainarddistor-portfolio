@@ -1,0 +1,94 @@
+---
+import { footer, nav, contactLinks } from "../../data/site";
+
+const year = new Date().getFullYear();
+const copyrightText = footer.copyright.replace("{{YEAR}}", year.toString());
+---
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        {nav.logo.replace(/\.$/, "")}<span class="footer-dot">.</span>
+      </a>
+      <p class="footer-tagline">{footer.tagline}</p>
+    </div>
+
+    <div class="footer-cols">
+      <ul class="footer-nav">
+        {nav.items.map((item) => (
+          <li><a href={item.href} class="footer-link">{item.label}</a></li>
+        ))}
+      </ul>
+      <ul class="footer-nav">
+        <li><a href={`mailto:${contactLinks.email}`} class="footer-link">{contactLinks.email}</a></li>
+        <li><a href={contactLinks.linkedIn} class="footer-link" rel="noopener" target="_blank">LinkedIn</a></li>
+        <li><a href={contactLinks.twitter} class="footer-link" rel="noopener" target="_blank">X</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="shell footer-base">
+    <p class="footer-copy">{copyrightText}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--paper-2);
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+  .footer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: space-between;
+    padding-bottom: 3rem;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .footer-dot { color: var(--accent-ink); }
+  .footer-tagline {
+    margin-top: 0.75rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink-3-solid);
+    max-width: 22ch;
+  }
+  .footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .footer-nav { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-link {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    transition: color 0.25s ease;
+  }
+  .footer-link:hover { color: var(--accent-ink); }
+  .footer-base {
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+    color: var(--ink-3-solid);
+  }
+
+  @media (min-width: 768px) {
+    .footer-inner { flex-direction: row; gap: 4rem; }
+    .footer-cols { grid-template-columns: auto auto; gap: 4rem; }
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-title: "Nobody Ranks "Fast" Anymore. This Is What Gets Content Cited by AI"
+title: "Nobody Ranks \"Fast\" Anymore. This Is What Gets Content Cited by AI"
 slug: "ai-engine-optimization-reddit-tiktok-geo"
 date: "2026-07-02"
 category: "AI Search"

@@ -1,0 +1,263 @@
+---
+import { sections, formFields, contactLinks } from "../data/site";
+---
+
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <div class="contact-divider" />
+
+    <div class="contact-layout">
+      {/* Left: Intro and Links */}
+      <div class="contact-intro">
+        <p class="eyebrow">{sections.contact.eyebrow}</p>
+        <h2 class="section-heading contact-heading">
+          GET IN <span class="green-gradient-text">TOUCH</span>
+        </h2>
+        <p class="contact-paragraph">
+          {sections.contact.paragraph}
+        </p>
+
+        <div class="contact-links">
+          <a
+            href={`mailto:${contactLinks.email}`}
+            class="contact-link"
+            title="Email"
+          >
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            </svg>
+          </a>
+          <a
+            href={contactLinks.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link"
+            title="LinkedIn"
+          >
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.39v-1.2h-2.5v8.5h2.5v-4.34c0-.77.62-1.4 1.4-1.4a1.4 1.4 0 0 1 1.4 1.4v4.34h2.5M7 8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-1.5 9.5h3v-8.5h-3v8.5z" />
+            </svg>
+          </a>
+          <a
+            href={contactLinks.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-link"
+            title="X (formerly Twitter)"
+          >
+            <svg class="contact-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22.46 6c-.87.39-1.8.65-2.77.77 1-.6 1.76-1.55 2.12-2.68-.93.55-1.96.95-3.06 1.17-.88-.94-2.13-1.53-3.51-1.53-2.66 0-4.81 2.16-4.81 4.81 0 .38.04.75.13 1.1-4-.2-7.64-2.14-10.04-5.09-.42.72-.66 1.56-.66 2.46 0 1.67.85 3.14 2.14 4.01-.79-.03-1.54-.24-2.19-.6v.06c0 2.33 1.66 4.28 3.86 4.72-.4.11-.83.17-1.27.17-.31 0-.62-.03-.92-.08.62 1.91 2.41 3.3 4.54 3.34-1.65 1.29-3.73 2.06-5.99 2.06-.39 0-.77-.02-1.15-.07 2.14 1.37 4.68 2.17 7.39 2.17 8.87 0 13.72-7.35 13.72-13.72 0-.21 0-.42-.01-.62.94-.68 1.76-1.53 2.41-2.5z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* Right: Form */}
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+        <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY_PLACEHOLDER" />
+
+        <div class="form-group">
+          <label class="form-label">{formFields.nameLabel}</label>
+          <input
+            type="text"
+            name="name"
+            required
+            class="form-input"
+            placeholder={formFields.namePlaceholder}
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">{formFields.emailLabel}</label>
+          <input
+            type="email"
+            name="email"
+            required
+            class="form-input"
+            placeholder={formFields.emailPlaceholder}
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">{formFields.subjectLabel}</label>
+          <input
+            type="text"
+            name="subject"
+            required
+            class="form-input"
+            placeholder={formFields.subjectPlaceholder}
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">{formFields.messageLabel}</label>
+          <textarea
+            name="message"
+            required
+            rows={5}
+            class="form-input form-textarea"
+            placeholder={formFields.messagePlaceholder}
+          />
+        </div>
+
+        <button type="submit" class="btn-primary form-button">
+          {formFields.submitButton}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: var(--space-2xl) 0;
+  }
+
+  .contact-container {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .contact-container { padding-inline: 2.5rem; }
+  }
+
+  .contact-divider {
+    height: 1px;
+    background: var(--line-strong);
+    margin-bottom: var(--space-xl);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  @media (min-width: 768px) {
+    .contact-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+  }
+
+  .contact-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .contact-heading {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 420;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0.5rem 0 var(--space-md) 0;
+  }
+
+  .contact-paragraph {
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin: 0 0 var(--space-lg) 0;
+    max-width: 48ch;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.5rem;
+    background: var(--paper-2);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--ink-2);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  .contact-link:hover {
+    background: var(--paper-3);
+    border-color: var(--line-strong);
+    color: var(--accent-ink);
+  }
+
+  .contact-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-label {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 560;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-3-solid);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 0.75rem 0;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .form-input::placeholder {
+    color: var(--ink-3-solid);
+  }
+
+  .form-input:focus {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--paper-2) 50%, transparent);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 7.5rem;
+    border-bottom-width: 1px;
+    line-height: 1.6;
+  }
+
+  .form-button {
+    align-self: flex-start;
+    margin-top: var(--space-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-link,
+    .form-input {
+      transition: none;
+    }
+  }
+</style>
