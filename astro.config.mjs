@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://www.raingoesaway.com",
+  server: { port: process.env.PORT ? Number(process.env.PORT) : 4321 },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
