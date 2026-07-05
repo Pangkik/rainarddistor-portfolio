@@ -6,8 +6,9 @@ import { sections } from "../../data/site";
 import cagai from "../../assets/portfolio/IMG_7915.JPG";
 import cybercon from "../../assets/portfolio/CYBERCON Day 3-191.jpg";
 import ayfn from "../../assets/blog/dfuns 2025-10-20 200141.684.JPG";
+import adse from "../../assets/portfolio/peek-pick-adse.jpg";
 
-// Photo wired per event name. ADSE has no photo (renders without an image).
+// Photo wired per event name.
 const photoByEvent: Record<string, { src: ImageMetadata; alt: string } | null> = {
   "Use of AI in CagAI": {
     src: cagai,
@@ -21,7 +22,10 @@ const photoByEvent: Record<string, { src: ImageMetadata; alt: string } | null> =
     src: ayfn,
     alt: "Rainard Distor at the AYFN Autumn Japan Culture Camp in Osaka",
   },
-  "ASEAN Data Science Explorers (ADSE) National Finals": null,
+  "ASEAN Data Science Explorers (ADSE) National Finals": {
+    src: adse,
+    alt: "Peek-Pick project title card from the ASEAN Data Science Explorers 2025 National Finals",
+  },
 };
 ---
 
