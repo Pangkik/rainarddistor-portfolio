@@ -27,6 +27,11 @@ export const sections = {
     heading: "SELECTED WRITING",
     blurb: "Longer research and published pieces, from cybersecurity to philosophy.",
   },
+  builds: {
+    eyebrow: "Builds",
+    heading: "THINGS I'VE SHIPPED",
+    blurb: "Apps and tools I've designed and shipped, from a barter marketplace to on-device voice dictation.",
+  },
   speaking: {
     eyebrow: "Speaking",
     heading: "ENGAGEMENTS & TALKS",

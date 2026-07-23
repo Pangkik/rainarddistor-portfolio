@@ -1,0 +1,176 @@
+---
+import { builds } from "../../data/builds";
+import { sections } from "../../data/site";
+---
+
+<section id="builds" class="block">
+  <div class="shell">
+    <div class="sec-head" data-reveal>
+      <div>
+        <h2 class="sec-title">
+          <span class="sec-num">03</span><span class="sec-dash">—</span><span>builds</span>
+        </h2>
+        <p class="sec-blurb">{sections.builds.blurb}</p>
+      </div>
+    </div>
+
+    <ul class="builds-grid">
+      {builds.map((b) => (
+        <li class="build-card" data-reveal>
+          <div class="build-top mono">
+            <span class="build-kind">{b.kind}</span>
+            <span class="build-year">{b.year}</span>
+          </div>
+
+          <h3 class="build-name">{b.name}</h3>
+          <p class="build-tagline">{b.tagline}</p>
+
+          <ul class="build-stack mono" aria-label="Tech stack">
+            {b.stack.map((s) => <li class="build-chip">{s}</li>)}
+          </ul>
+
+          <div class="build-links mono">
+            {b.live && (
+              <a href={b.live} target="_blank" rel="noopener noreferrer" class="build-link build-link--live">
+                live
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17 17 7M9 7h8v8"/></svg>
+              </a>
+            )}
+            <a href={b.code} target="_blank" rel="noopener noreferrer" class="build-link build-link--code">
+              code
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .builds-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .build-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1.6rem 1.5rem 1.4rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+                box-shadow 0.4s ease, border-color 0.3s ease;
+  }
+  /* Accent top rule — the bolder register for the builds side */
+  .build-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .build-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--line-strong);
+  }
+  .build-card:hover::before { transform: scaleX(1); }
+
+  .build-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: var(--step--2);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.9rem;
+  }
+  .build-kind {
+    color: var(--accent-fg);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .build-year { color: var(--fg-3); }
+
+  .build-name {
+    font-family: var(--font-body);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--fg);
+    margin: 0 0 0.65rem;
+  }
+  .build-tagline {
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.55;
+    color: var(--fg-3);
+    margin: 0 0 1.25rem;
+  }
+
+  .build-stack {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .build-chip {
+    font-size: var(--step--2);
+    color: var(--fg-2);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 0.22rem 0.6rem;
+    white-space: nowrap;
+  }
+
+  .build-links {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    font-size: var(--step--1);
+    letter-spacing: 0.02em;
+  }
+  .build-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .build-link svg { transition: transform 0.25s ease; }
+  .build-link:hover svg { transform: translate(2px, -2px); }
+  .build-link--live { color: var(--accent-fg); }
+  .build-link--live:hover { color: var(--accent); }
+  .build-link--code { color: var(--fg-2); }
+  .build-link--code:hover { color: var(--fg); }
+  .build-link--code:hover svg { transform: translateX(-2px); }
+
+  @media (min-width: 640px) {
+    .builds-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+  }
+  @media (min-width: 1280px) {
+    .builds-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .build-card, .build-card:hover { transform: none !important; }
+    .build-card::before { transition: none; }
+    .build-link svg { transition: none; }
+  }
+</style>
